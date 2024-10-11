@@ -28,8 +28,39 @@
             background-color: #575757;
         }
         .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 50px;
+        }
+        /* Left column for picture */
+        .left-column {
+            flex: 1;
             text-align: center;
-            padding: 50px;
+        }
+        .left-column img {
+            width: 250px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #ccc;
+        }
+        /* Right column for biography */
+        .right-column {
+            flex: 2;
+            margin-left: 20px;
+        }
+        .right-column h2 {
+            margin-bottom: 10px;
+        }
+        .right-column p {
+            line-height: 1.6;
+        }
+        section h2 {
+            text-align: left;
+            margin-top: 0px;
+            margin-left: 100px;
+            margin-right: 100px;
+            font-size: 22pt;
         }
     </style>
 </head>
@@ -46,11 +77,18 @@
 
     <!-- Main Content -->
     <div class="container">
-        <h1>Welcome to My Professional Website</h1>
-        <p>I am [Your Name], a PhD student in Political Science specializing in International Relations.</p>
-        <p>Explore my research, teaching experience, and academic journey through the links above.</p>
+        <div class="left-column">
+            <img src="assets/your-photo.jpg" alt="John Gantner">
+        </div>
+        <div class="right-column">
+            <h2>About Me</h2>
+            <p>I am a PhD student in the Department of Political Science at the University of Kentucky.
+            I concentrate on International Relations and Research Methods, with particular research
+            interests in strategy, diplomacy, international conflict, and geography.</p>
+            <p>I am originally from a small farm town in Central Ohio. I completed my B.A. at Marietta College
+            in Political Science, History, and Geographic Information Science.</p>
+        </div>
     </div>
 
 </body>
 </html>
-
