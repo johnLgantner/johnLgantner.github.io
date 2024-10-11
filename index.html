@@ -40,9 +40,9 @@
         }
         .left-column img {
             width: 250px;
-            height: auto;
-            border-radius: 50%;
-            border: 3px solid #ccc;
+            height: 250px; /* Ensure a square shape */
+            border-radius: 50%; /* Make it a circle */
+            object-fit: cover; /* Ensure the image fits within the circle */
         }
         /* Right column for biography */
         .right-column {
@@ -78,7 +78,7 @@
     <!-- Main Content -->
     <div class="container">
         <div class="left-column">
-            <img src="assets/your-photo.jpg" alt="John Gantner">
+            <img src="assets/UKheadshot.jpeg" alt="John Gantner">
         </div>
         <div class="right-column">
             <h2>About Me</h2>
