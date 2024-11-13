@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | John Gantner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,38 +31,133 @@
         }
         .container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: flex-start;
-            margin: 50px;
+            margin: 20px;
         }
-        /* Left column for picture */
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Adjust Section Margins */
+        section {
+            margin: 20px 0;
+        }
+
+        /* Adjust Container Margins */
+        .container {
+            margin: 20px 0;
+        }
         .left-column {
             flex: 1;
             text-align: center;
         }
         .left-column img {
             width: 250px;
-            height: 250px; /* Ensure a square shape */
-            border-radius: 50%; /* Make it a circle */
-            object-fit: cover; /* Ensure the image fits within the circle */
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
         }
-        /* Right column for biography */
         .right-column {
             flex: 2;
             margin-left: 20px;
         }
         .right-column h2 {
+            font-size: 22pt;
             margin-bottom: 10px;
         }
         .right-column p {
             line-height: 1.6;
         }
+        section {
+            margin: 20px;
+        }
         section h2 {
-            text-align: left;
-            margin-top: 0px;
-            margin-left: 100px;
-            margin-right: 100px;
             font-size: 22pt;
+            margin-bottom: 10px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .social-icons a {
+            color: #333;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #0073b1;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        #map {
+            height: 600px;
+            margin: 20px;
+            width: 100%;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .right-column {
+                margin-left: 0;
+                text-align: center;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            nav a {
+                display: block;
+                padding: 10px;
+            }
+            .left-column img {
+                width: 200px;
+                height: 200px;
+            }
+            section h2 {
+                font-size: 22pt;
+            }
+        }
+        /* Kentucky-Themed Popup */
+        .kentucky-popup {
+            background-color: #0033a0;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 200px;
+        }
+        .kentucky-popup h3 {
+            margin: 0;
+            font-size: 16px;
+            color: white; 
+        }
+        .kentucky-popup p {
+            margin: 5px 0;
+        }
+        .kentucky-popup a {
+            color: white;
+            text-decoration: none;
+        }
+        .kentucky-popup a:hover {
+            text-decoration: underline;
+        }
+        .popup-image {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -75,6 +172,9 @@
         <a href="contact.html">Contact Me</a>
     </nav>
 
+    <!-- Page Wrapper for Consistent Margins -->
+    <div class="page-wrapper">
+
     <!-- Main Content -->
     <div class="container">
         <div class="left-column">
@@ -82,13 +182,103 @@
         </div>
         <div class="right-column">
             <h2>About Me</h2>
-            <p>I am a PhD student in the Department of Political Science at the University of Kentucky.
-            I concentrate on International Relations and Research Methods, with particular research
-            interests in strategy, diplomacy, international conflict, and geography.</p>
-            <p>I am originally from a small farm town in Central Ohio. I completed my B.A. at Marietta College
-            in Political Science, History, and Geographic Information Science.</p>
+            <p>I am currently a PhD candidate in the Department of Political Science at the University of Kentucky, specializing in
+                International Relations and advanced Research Methods. My research focuses primarily on the strategic dimensions of international 
+                conflict, diplomacy, and the geopolitical implications of territorial dynamics. With a strong interest in how geography influences state 
+                behavior, my work aims to uncover the operational determinants of military strategy, examine spheres of influence, 
+                and explore patterns of foreign land ownership near critical infrastructure such as U.S. military bases.
+            </p>
+            <p>I am originally from a small farm town in Central Ohio. I completed my Bachelor of Arts at Marietta College, where I double-majored in 
+            Political Science and History, with a minor in Geographic Information Science (GIS). During my undergraduate studies, I developed a strong 
+            methodological skill set, particularly in econometrics, spatial data analysis, geospatial data visualization, all of which continues to inform my research today.
+            </p>
         </div>
     </div>
+
+    <!-- Research Highlights Section -->
+    <section>
+        <h2>Interests</h2>
+        <ul>
+            <li><strong>Grand Strategy & Diplomacy</li>
+            <li><strong>Interstate Conflict</li>
+            <li><strong>Political Geography</li>
+            <li><strong>Methods</li>
+        </ul>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section>
+        <h2>Upcoming Events</h2>
+        <ul>
+            <li>Presentation at ISA Midwest - November 2024, St. Louis, MO</li>
+            <li>Presentation at MPSA Annual Conference - March 2025, Chicago, IL</li>
+        </ul>
+    </section>
+
+    <!-- Skills Section -->
+    <section>
+        <h2>Skills</h2>
+        <ul>
+            <li>Data Analysis: R, Stata, Python</li>
+            <li>Geospatial Analysis: QGIS, ArcGIS</li>
+            <li>Web Development: HTML, CSS, JavaScript</li>
+        </ul>
+    </section>
+
+    <!-- Connect with Me Section -->
+    <section>
+        <h2>Contact Me</h2>
+        <div class="social-icons">
+            <!-- <a href="https://scholar.google.com" target="_blank" title="Google Scholar">
+                <i class="fa-brands fa-google fa-2x"></i> -->
+            </a>
+            <a href="www.linkedin.com/in/john-gantner" target="_blank" title="LinkedIn">
+                <i class="fa-brands fa-linkedin fa-2x"></i>
+            </a>
+            <!-- <a href="https://www.researchgate.net" target="_blank" title="ResearchGate">
+                <i class="fa-brands fa-researchgate fa-2x"></i> -->
+            </a>
+            <a href="https://x.com/realjohngantner" target="_blank" title="X">
+                <i class="fa-brands fa-x-twitter fa-2x"></i>
+            </a>
+            <a href="https://github.com/johnLgantner" target="_blank" title="GitHub">
+                <i class="fa-brands fa-github fa-2x"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section>
+        <div id="map"></div>
+    </section>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize the map
+            const map = L.map('map').setView([38.0393, -84.5041], 16);
+    
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+    
+            // Custom Popup HTML with Kentucky Theme
+            const popupContent = `
+                <div class="kentucky-popup">
+                    <h3>120 Patterson Drive Lexington, Kentucky 40506</h3>
+                    <p>1606 Patterson Office Tower<br><a href="mailto:john.gantner@uky.edu">john.gantner@uky.edu</a></p>
+                    <img src="assets/UK-logo.png" alt="Kentucky Logo" class="popup-image">
+                </div>
+            `;
+    
+            // Add a marker with the custom popup
+            const marker = L.marker([38.0393, -84.5041]).addTo(map);
+            marker.bindPopup(popupContent).openPopup();
+        });
+    </script>
 
 </body>
 </html>
