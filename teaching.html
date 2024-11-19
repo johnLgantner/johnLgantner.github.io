@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teaching | John Gantner</title>
     <style>
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
         }
+
+        /* Navigation Bar */
         nav {
             background-color: #333;
             text-align: center;
@@ -27,9 +30,63 @@
         nav a:hover {
             background-color: #575757;
         }
+
+       
+        .accordion {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 5px;
+        }
+
+        .accordion-button {
+            background-color: #333;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            width: 100%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.4s;
+        }
+
+        .accordion-button:hover {
+            background-color: #575757;
+        }
+
+        .accordion-content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        /* Page Content */
         .container {
-            text-align: center;
+            text-align: Left;
             padding: 50px;
+            padding-bottom: 20px;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px;
+            }
+            nav a {
+                padding: 10px;
+                font-size: 16px;
+            }
+            .accordion {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -47,8 +104,64 @@
     <!-- Main Content -->
     <div class="container">
         <h1>Teaching</h1>
-        <p>[Information about teaching experience]</p>
+        <p>My teaching philosophy is rooted in the belief that Political Science provides students with the tools to critically analyze complex,
+        real-world events. I aim to foster a deep understanding of political motivations and interactions, whether in American politics, 
+        Comparative politics, or international relations. Regardless of the course level, my primary goal is for students to grasp the 
+        foundational reasons behind political decisions and how these manifest in observable actions. I emphasize interactive learning, 
+        incorporating simulations that allow students to apply knowledge in real-world scenarios. This approach not only engages students 
+        but also provides a more inclusive environment for assessment, moving beyond rote memorization to meaningful, application-based 
+        evaluation.</p>
+
+        <p>I am committed to continually improving my teaching methods. I regularly seek feedback from students, peers, and through 
+        self-reflection to ensure my classes evolve and remain responsive to students’ needs. This openness to feedback and my dedication to 
+        adapting my approach help create an effective, inclusive, and dynamic classroom where students can thrive.</p>
+
+        <p>Included below are the syllabi of courses for which I served as the primary instructor:</p>
     </div>
+
+    <!-- Accordion for Course Syllabi -->
+    <div class="accordion">
+        <button class="accordion-button">Introduction to International Relations</button>
+        <div class="accordion-content">
+            <iframe src="assets/PS230 - Syllabus - Gantner (Fall 2024).pdf" title="Introduction to International Relations Syllabus"></iframe>
+        </div>
+        
+        <button class="accordion-button">Introduction to Political Analysis</button>
+        <div class="accordion-content">
+            <iframe src="assets/PS372 - Syllabus - Gantner (Spring 2024).pdf" title="Introduction to Political Analysis"></iframe>
+        </div>
+        
+        <!-- <button class="accordion-button">Advanced Topics in International Security</button>
+        <div class="accordion-content">
+            <iframe src="assets/advanced_security_syllabus.pdf" title="Advanced Topics in International Security Syllabus"></iframe>
+        </div> -->
+        
+        <!-- <button class="accordion-button">Quantitative Methods in Political Science</button>
+        <div class="accordion-content">
+            <iframe src="assets/quant_methods_syllabus.pdf" title="Quantitative Methods in Political Science Syllabus"></iframe>
+        </div> -->
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 20px;">
+        <p>&copy; 2024 John Gantner. All rights reserved.</p>
+    </footer>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion-button");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
+
