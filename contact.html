@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Me | John Gantner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,6 +32,45 @@
             text-align: center;
             padding: 50px;
         }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+        .social-icons a {
+            color: #333;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #0073b1;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .right-column {
+                margin-left: 0;
+                text-align: center;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            nav a {
+                display: block;
+                padding: 10px;
+            }
+            .left-column img {
+                width: 200px;
+                height: 200px;
+            }
+            section h2 {
+                font-size: 22pt;
+            }
+        }
     </style>
 </head>
 <body>
@@ -47,8 +87,32 @@
     <!-- Main Content -->
     <div class="container">
         <h1>Contact Me</h1>
-        <p>Email: [johngantner@uky.edu]</p>
-        <p>LinkedIn: [https://www.linkedin.com/in/john-gantner-b0451b231/]</p>
+        <p>If you'd like to get in touch, feel free to connect through email or social media.</p>
+        
+        <!-- Social Media Links -->
+        <div class="social-icons">
+            <!-- <a href="https://scholar.google.com" target="_blank" title="Google Scholar">
+                <i class="fa-brands fa-google fa-2x"></i> -->
+            </a>
+            <a href="https://www.linkedin.com/in/john-gantner" target="_blank" title="LinkedIn">
+                <i class="fa-brands fa-linkedin fa-2x"></i>
+            </a>
+            <!-- <a href="https://www.researchgate.net" target="_blank" title="ResearchGate">
+                <i class="fa-brands fa-researchgate fa-2x"></i> -->
+            </a>
+            <a href="https://x.com/realjohngantner" target="_blank" title="X">
+                <i class="fa-brands fa-x-twitter fa-2x"></i>
+            </a>
+            <a href="https://bsky.app/profile/johngantner.bsky.social" target="_blank" title="Bluesky">
+                <i class="fa-brands fa-bluesky fa-2x"></i>
+            </a>
+            <a href="https://github.com/johnLgantner" target="_blank" title="GitHub">
+                <i class="fa-brands fa-github fa-2x"></i>
+            </a>
+            <a href="mailto:johngantner@uky.edu" target="_blank" title="Email">
+                <i class="fa-solid fa-envelope fa-2x"></i>
+            </a>
+        </div>       
     </div>
 
 </body>
