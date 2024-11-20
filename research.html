@@ -11,6 +11,8 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Navigation Bar */
         nav {
             background-color: #333;
             text-align: center;
@@ -27,9 +29,63 @@
         nav a:hover {
             background-color: #575757;
         }
+
+        /* Page Content */
         .container {
-            text-align: center;
+            text-align: left;
             padding: 50px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .container h1 {
+            font-size: 25pt;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            font-size: 22px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .publication {
+            margin-bottom: 10px;
+        }
+        .publication a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .publication a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            nav a {
+                display: block;
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -47,8 +103,28 @@
     <!-- Main Content -->
     <div class="container">
         <h1>Research</h1>
-        <p>[Brief description of research interests and work]</p>
-    </div>
 
+        <!-- Research Interests -->
+        <div class="section">
+            <h2>Research Interests</h2>
+            <p>I focus on international relations, particularly the operational determinants of military strategy, peacekeeping effectiveness, 
+            and the role of foreign land ownership in national security. My work often employs spatial analysis and statistical modeling to 
+            explore these questions.</p>
+        </div>
+
+        <!-- Current Projects -->
+        <div class="section">
+            <h2>Current Projects</h2>
+            <p>My ongoing research includes:</p>
+            <ul>
+                <li>Analyzing the proximity of Chinese-owned farms to U.S. military installations.</li>
+                <li>Exploring the role of terrain in shaping military strategies from 1815 to the present.</li>
+                <li>Evaluating the effectiveness of peacekeeping operations in reducing civilian violence through spatial methodologies.</li>
+            </ul>
+        </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 John Gantner. All rights reserved.</p>
+    </footer>
 </body>
 </html>
