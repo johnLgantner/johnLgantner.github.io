@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.DS_Store
+
+*.swp
+
+R/.depr/*
+tests/testthat/.depr/*
+
+wtt.yaml
+docs
+inst/doc

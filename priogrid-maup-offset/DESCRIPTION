@@ -1,0 +1,70 @@
+Package: priogrid
+Title: PRIOGRID
+Version: 3.0.1
+Authors@R: c(person("Jonas", "Vestby", email = "jonves@prio.org", role = c("aut", "cre"), 
+                  comment = c(ORCID = "0000-0002-3054-977X")),
+             person("Andreas", "Forø Tollefsen", email = "andreas@prio.org", role = "aut", 
+                  comment = c(ORCID = "0000-0002-0864-5132")),
+             person("Karim", "Bahgat", email = "karim.bahgat@outlook.com", role = "ctb", comment = "Co-author of PG2"),
+             person("Peace Research Institute Oslo (PRIO)", role = "cph"),
+             person("Håvard", "Strand", email = "hs@prio.org", role = "ctb"),
+             person("Scott", "Gates", email = "scott@prio.org", role = "ctb"),
+             person("Halvard", "Buhaug", email = "halvard@prio.org", role = "ctb"),
+             person("Kristine", "Helskog", email = "krihel@prio.org", role = "ctb"),
+             person("Garret", "Benz", email = "garben@prio.org", role = "ctb"),
+             person("Ingvild", "Kjelstrup Smestad", email = "ingviksm@ifi.uio.no", role = "ctb"),
+             person("Tiril", "Rahn", email = "tiril.rahn@univ.ox.ac.uk", role = "ctb"),
+             person("Christian", "Oswald", email = "christian.oswald@unibw.de", role = "ctb"),
+             person("Peder", "Landsverk", email = "pglandsverk@gmail.com", role = "ctb"),
+             person("Vilde", "Bergstad Larsen", email = "villar@prio.org", role = "ctb"))
+Description: An R-package for collecting and standardizing open spatial data. 
+License: MIT + ODC-By + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RdMacros: Rdpack
+Suggests:
+    testthat (>= 3.1.7),
+    withr,
+    assertthat,
+    knitr,
+    rmarkdown,
+    snowfall,
+    Hmisc,
+    SPEI,
+    ncdf4,
+    checkmate,
+    uuid,
+    RCurl,
+    terra,
+    sf,
+    exactextractr,
+    countrycode
+Config/testthat/edition: 3
+Imports:
+    dplyr,
+    tidyr,
+    stringr,
+    readr,
+    lubridate,
+    httr2,
+    curl,
+    R.utils,
+    Rdpack,
+    data.table,
+    cachem,
+    rappdirs,
+    R6,
+    digest,
+    rlang,
+    RefManageR,
+    arrow,
+    jsonlite,
+    stats,
+    utils
+Depends: 
+    R (>= 3.5)
+URL: http://prio-data.github.io/priogrid/
+BugReports: https://github.com/prio-data/priogrid/issues
+VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

@@ -1,0 +1,59 @@
+url: http://prio-data.github.io/priogrid/
+template:
+  bootstrap: 5
+  light-switch: yes
+  bootswatch: yeti
+  bslib:
+    base_font: {google: "Roboto"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "JetBrains Mono"}
+  assets: pkgdown/assets
+
+navbar:
+  structure:
+    left: [reference, articles, citation]
+    right: [search, github, lightswitch]
+  components:
+    articles:
+      text: Tutorials
+      menu:
+      - text: Getting Started
+        href: articles/getting-started.html
+      - text: Citations and Bibliography
+        href: articles/citation.html
+      - text: Accessing PRIOGRID as Rasters
+        href: articles/working-with-rasters.html
+      - text: Custom Configurations
+        href: articles/custom-config.html
+      - text: Testing MAUP with an Offset Grid
+        href: articles/maup-offset.html
+      - text: Understanding Metadata
+        href: articles/metadata.html
+      - text: Contributing
+        href: articles/contributing.html
+
+home:
+  sidebar:
+    structure: [links, license, community, custom_cite, authors]
+    components:
+      custom_cite:
+        title: Citation
+        text: '<a href="articles/citation.html">Citing PRIOGRID</a>'
+
+articles:
+- title: Tutorials
+  navbar: ~
+  contents:
+  - getting-started
+  - citation
+  - working-with-rasters
+  - custom-config
+  - maup-offset
+  - metadata
+  - contributing
+
+citation:
+  path: "inst/CITATION"
+  title: "How to cite PRIOGRID"
+  show_bibtex: true
+  show_text: true
