@@ -1,0 +1,144 @@
+---
+title: "Testing MAUP with an Offset Grid"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Testing MAUP with an Offset Grid}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(priogrid)
+```
+
+The modifiable areal unit problem (MAUP) is the observation that aggregating
+the same underlying data onto different arbitrary spatial partitions can
+change the aggregated results, even when nothing about the underlying data
+changes. Because PRIO-GRID cell boundaries are an arbitrary 0.5-degree lattice
+with no relationship to the phenomena measured within it, it is a natural
+candidate for a MAUP sensitivity check: build the same variable twice, once
+on the standard grid and once on a grid shifted by a small, fixed distance,
+and compare.
+
+`pg_offset_grid()` creates the shifted config for exactly this purpose.
+
+## Shifting a Configuration
+
+`pg_offset_grid()` takes a `pg_config`, a distance in kilometres, and a
+compass bearing, and returns a new config with the same `nrow`, `ncol` and
+`crs` but a translated `extent`:
+
+```{r offset-basic}
+cfg <- pg_config(
+  nrow   = 100,
+  ncol   = 100,
+  extent = c(xmin = 0, xmax = 10, ymin = 45, ymax = 55)
+)
+
+cfg_east <- pg_offset_grid(cfg, distance_km = 5, bearing_deg = 90)
+
+cfg$extent
+cfg_east$extent
+```
+
+`bearing_deg` follows compass convention: `0` is north, `90` (the default) is
+east, `180` is south, `270` is west. For a geographic CRS such as the default
+`epsg:4326`, PRIOGRID converts the kilometre distance to degrees using the
+extent's vertical midpoint as a reference latitude, since a degree of
+longitude covers less ground away from the equator. Pass `reference_lat`
+explicitly if you want the offset to be exact at a specific latitude (e.g.
+the centroid of your study area) instead:
+
+```{r offset-reference-lat}
+pg_offset_grid(cfg, distance_km = 5, bearing_deg = 90, reference_lat = 50)$extent
+```
+
+Both grids have the same resolution and cell count — only their position
+changes:
+
+```{r offset-compare, eval=FALSE}
+pg          <- prio_blank_grid(cfg)
+pg_east     <- prio_blank_grid(cfg_east)
+
+terra::res(pg) == terra::res(pg_east)    # TRUE: identical cell size
+terra::ext(pg) == terra::ext(pg_east)    # FALSE: shifted position
+```
+
+## Building Both Grids
+
+Every `gen_*()` variable function, and `calc_pg()`/`build_pg_dataset()` that
+call them, take a `config` argument and use it to build `prio_blank_grid()`
+internally. So building a MAUP comparison is just calling the same variable
+twice, once per config:
+
+```{r build-both, eval=FALSE}
+pg_set_rawfolder("/path/to/your/data/folder")
+
+cfg <- pg_config(
+  nrow       = 40,
+  ncol       = 40,
+  extent     = c(xmin = 5, xmax = 25, ymin = 45, ymax = 55),
+  start_date = as.Date("2020-12-31"),
+  end_date   = as.Date("2020-12-31")
+)
+cfg_east <- pg_offset_grid(cfg, distance_km = 5, bearing_deg = 90)
+
+calc_pg("ghsl_population_grid", config = cfg)
+calc_pg("ghsl_population_grid", config = cfg_east)
+
+pop_baseline <- load_pgvariable("ghsl_population_grid", config = cfg)
+pop_offset   <- load_pgvariable("ghsl_population_grid", config = cfg_east)
+```
+
+Because the grids share the same `nrow`/`ncol`, cells line up positionally
+even though `pgid` is config-dependent, so the two rasters can be compared
+directly (e.g. `terra::global(pop_baseline - pop_offset, "sum", na.rm = TRUE)`
+for the aggregate difference, or a per-cell percent-change map).
+
+## Taming Large Downloads
+
+The two sources most likely to trip up a first run — `GHSL GHS Population
+Grid` and `HILDA+` land cover — are distributed as a handful of global files,
+several gigabytes combined, regardless of how small your `config$extent` or
+date range is. `automatic_download = TRUE` (the default) fetches whatever is
+missing the first time a `gen_*()`/`read_*()` function needs it, which can
+look like the download is "stuck" on a slow connection.
+
+A few things make this manageable:
+
+- **You only pay the download cost once.** The baseline and offset grid in
+  the example above use the same raw source files — `pg_offset_grid()` only
+  changes how they're aggregated, not what's downloaded. Run the download
+  once, then experiment with as many offsets as you like.
+- **Download just the sources you need, ahead of time**, rather than letting
+  a `calc_pg()` call trigger it mid-computation:
+
+  ```{r download-targeted, eval=FALSE}
+  pgsearch("HILDA")$in_name$id     # find the source id
+  pgsearch("GHSL Population")$in_name$id
+
+  files <- pg_rawfiles() |>
+    dplyr::filter(source_name %in% c("HILDA+", "GHSL GHS Population Grid"))
+
+  download_pg_rawdata(file_info = files)
+  ```
+
+- **Downloads resume automatically.** If a transfer is interrupted, re-running
+  `download_pg_rawdata()` (or just retrying the `gen_*()`/`calc_pg()` call
+  that triggered it) picks up from where it left off rather than starting
+  over — look for `.part` files in your raw folder.
+- **Check what's actually missing** with `pg_data_availability()` before
+  assuming a download failed outright; `n_partial` tells you if a resumable
+  transfer is already most of the way there.
+- If a source keeps failing outright (not just slow), increase `max_retry`
+  and `retry_max_delay` in `download_pg_rawdata()` — the defaults back off up
+  to 120 seconds between attempts, which can still be too fast for a
+  congested link.
+
+## Next Steps
+
+- [Custom Spatial and Temporal Configurations](custom-config.html) — the full
+  `pg_config()` reference this vignette builds on
+- [Accessing PRIOGRID as Rasters](working-with-rasters.html) — comparing and
+  plotting the resulting `SpatRaster` objects
